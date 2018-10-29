@@ -40,16 +40,18 @@ server.post('/',
 			    message: message.text
 			  })
 			  .then(function (response) {
-						switch(response.data.result.intent.name){
-							case 'saludar':
-								f.txt(sender, 'Hola 😀. Soy ArcBot [nombre providional]. Es un gusto saludarte.');
-								break;
-							case 'despedirse':
-								f.txt(sender, 'Adios 😄. Un placer hablar contigo!');
-								break;
-							case null:
-								f.txt(sender, 'Lo siento. Note he entendido 🤷. Recuerda que soy un bot y necesito más entrenamiento para comprender lo que me dices.');
-								break;
+			  			if(response.data.result.intent.confidence < 0.80 || response.data.result.intent.name == null){
+			  				f.txt(sender, 'Lo siento. Note he entendido 🤷. Recuerda que soy un bot y necesito más entrenamiento para comprender lo que me dices.');
+			  			}
+			  			else{
+							switch(response.data.result.intent.name){
+								case 'saludar':
+									f.txt(sender, 'Hola 😀. Soy ArcBot [nombre providional]. Es un gusto saludarte.');
+									break;
+								case 'despedirse':
+									f.txt(sender, 'Adios 😄. Un placer hablar contigo!');
+									break;
+							}
 						}
 						// Parrot
 			    	// f.txt(sender, `You just said ${message.text}`);
