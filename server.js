@@ -42,7 +42,7 @@ server.post('/',
 			  .then(function (response) {
 						switch(response.data.result.intent.name){
 							case 'saludar':
-								f.txt(sender, 'Hola 😀. Soy Arclight Bot [nombre providional]. Es un gusto saludarte.');
+								f.txt(sender, 'Hola 😀. Soy ArcBot [nombre providional]. Es un gusto saludarte.');
 								break;
 							case 'despedirse':
 								f.txt(sender, 'Adios 😄. Un placer hablar contigo!');
