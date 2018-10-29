@@ -1,6 +1,7 @@
 'use strict';
 // create an API server
 const Restify = require('restify');
+const axios = require('axios');
 const server = Restify.createServer({
 	name: 'ARCBotMessenger'
 });
@@ -34,8 +35,17 @@ server.post('/',
 			} = msg;
 
 			if (message.text) {
-				// If a text message is received, use f.txt or f.img to send text/image back.
-				f.txt(sender, `You just said ${message.text}`);
+				axios.post('http://209.97.143.4:8000/arclight/parsemessage', {
+			    model_id: '5bd642c741d1701e640c938e',
+			    message: message.text
+			  })
+			  .then(function (response) {
+						f.txt(sender, response.data.result.intent.name);
+			    	f.txt(sender, `You just said ${message.text}`);
+			  })
+			  .catch(function (error) {
+			    console.log(error);
+			  });
 			}
 		});
 		return next();
