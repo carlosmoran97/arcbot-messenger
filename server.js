@@ -40,8 +40,19 @@ server.post('/',
 			    message: message.text
 			  })
 			  .then(function (response) {
-						f.txt(sender, response.data.result.intent.name);
-			    	f.txt(sender, `You just said ${message.text}`);
+						switch(response.data.result.intent.name){
+							case 'saludar':
+								f.txt(sender, 'Hola 😀. Soy Arclight Bot [nombre providional]. Es un gusto saludarte.');
+								break;
+							case 'despedirse':
+								f.txt(sender, 'Adios 😄. Un placer hablar contigo!');
+								break;
+							case null:
+								f.txt(sender, 'Lo siento. Note he entendido 🤷. Recuerda que soy un bot y necesito más entrenamiento para comprender lo que me dices.');
+								break;
+						}
+						// Parrot
+			    	// f.txt(sender, `You just said ${message.text}`);
 			  })
 			  .catch(function (error) {
 			    console.log(error);
