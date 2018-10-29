@@ -51,6 +51,9 @@ server.post('/',
 								case 'despedirse':
 									f.txt(sender, 'Adios 😄. Un placer hablar contigo!');
 									break;
+                                                                case 'agradecimiento':
+									f.txt(sender, 'Por nada, estoy para ayudarte :D');
+									break;
 							}
 						}
 						// Parrot
